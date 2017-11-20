@@ -252,7 +252,7 @@ public:
 		refresh();
 	}
 
-	void loadResource()// load resource game
+	void loadResource()// load resource game 
 	{
 		 // Tìm Entity theo tên hoặc id , sau đó gọi các hàm load resource (chưa làm)
 
