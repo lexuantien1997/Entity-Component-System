@@ -1,13 +1,13 @@
-#ifndef SCENEMANAGER_H_
-#define SCENEMANAGER_H_
+#ifndef GameWorldMANAGER_H_
+#define GameWorldMANAGER_H_
 
 
-class SceneManager
+class GameWorldManager
 {
 public:
-	SceneManager();
-	~SceneManager();
+	GameWorldManager();
+	~GameWorldManager();
 };
 
 
-#endif // !SCENEMANAGER_H_
+#endif // !GameWorldMANAGER_H_

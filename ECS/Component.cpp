@@ -18,19 +18,7 @@ void Component::release()
 	delete this;
 }
 
-void Component::init()
-{
-}
-
-void Component::update(float dt)
-{
-}
-
-void Component::draw()
-{
-}
-
 Component::~Component()
 {
-	release();
+	
 }

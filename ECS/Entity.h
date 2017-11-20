@@ -1,36 +1,52 @@
-﻿#ifndef ENTITY
-#define ENTITY
+﻿#ifndef ENTITY_H
+#define ENTITY_H
 #include <vector>
 #include <algorithm>
 #include <map>
 #include "BaseID.h"
 #include <array>
+#include <cassert>
 
+
+class GameWorld;
 class Component;
-class Scene;
-
-/**
-*@brief   Theo Entity-Component-System thì:
-+ Component chỉ là nơi lưu trữ dữ liệu, không làm gì hơn nữa
-+ System là nơi thực hiện các nhiệm vụ logic của game như init, update cho các entity
-+ 1 Entity chứa nhiều component=> là nơi thực hiện nhiệm vụ init , update các component
-+ Scene (bối cảnh) là nơi chứa các Entity và System cần thiết cho 1 cảnh trong game
-+ Scene Manager là nơi quản lý các scene, vì 1 game sẽ só nhiều cảnh như cảnh đánh boss, cảnh kết thúc game, ... => Đây là nơi quản lý, update, init cho các scene
-**/
 
 
 // ============================================================================
 // Define some thing
 // ============================================================================
-	
-constexpr std::size_t maxComponents{ 64 }; // max components type Entity can have -> can resize if it not enough
 
+// max components type Entity can have -> can resize if it not enough
+// 2^n (n>=5)
+// std::size_t means BaseID can be a big number or small number
+constexpr std::size_t maxComponents{ 64 };
+
+// See the picture `ComponentArray`
+// Array of Component type, Each Component type has many `Component` that is defined by a `String`
 using ComponentArray = array<map<string, Component*>, maxComponents>;
 
+// Set component Array has element or not
+// std::bitset is an array of Boolean that have 2 value 0|1 (false|true)
 using ComponentBitset = bitset<maxComponents>;
+
 // ============================================================================
 // End define
 // ============================================================================
+
+
+// ================================================= Brief ======================================================
+//
+// - Entity is a object that resembles something inside your game
+// - Example:
+//		+ Character: rockman, samus, naruto, songoku,...
+//		+ NPCs: enemy, army-ship,...
+//		+ Weapons: bullet, gun, sword, archery,...
+//		+ Map, bike, ....
+// - NOTE: Entity constain 1 or many Component(s)
+//		+ Character: velocity, movement, sprite, camera
+// - Entity still storage the location of `System`
+//
+// ==============================================================================================================
 
 class Entity
 {
@@ -40,11 +56,14 @@ private:
 	//  Basic variable Entity need
 	// ============================================================================
 
-	string name; // name of entity -> unique name
+	// Name of entity -> unique name
+	// Just like `Component`: we can have more Entity with same type such as 100 Enemy, 2 Player, ...
+	string name; 
 
-	long id; // The unique id for the entity
+	// The unique id for the entity (use that)
+	long id; 
 
-	Scene* scene;
+	GameWorld* gameWorld;
 
 	bool alive; // Entity active or not
 	bool init; // Can component init data ? 
@@ -56,14 +75,14 @@ private:
 	ComponentBitset componentBitSet;
 
 public:
-	Entity(string name,Scene* s);
+	Entity(string name,GameWorld* s);
 
 	string getName() { return name; }
 	bool isAlive() { return alive; }
 	long getId() { return id; }
 	void active() { alive = true; }
 	void deActive() { alive = false; }
-	void setScene(Scene* s) { scene = s; }
+	void setGameWorld(GameWorld* s) { gameWorld = s; }
 	ComponentBitset getComponentBitset() { return componentBitSet; }
 
 	/**
@@ -147,11 +166,12 @@ inline T* Entity::addComponent(Args && ...arg)
 	string componentName = component->getName();
 
 	// Check type and name exist in entity or not:
-	if (hasComponent<T>(componentName))
+	assert(!hasComponent<T>(componentName) && "existed in this component type");
+	/*if (hasComponent<T>(componentName))
 	{
 		throw std::invalid_argument(componentName + "existed in this component type");
 		return NULL;
-	}
+	}*/
 
 	// make component active
 	component->setActive(true);
@@ -168,7 +188,7 @@ inline T* Entity::addComponent(Args && ...arg)
 	componentBitSet[index] = true; // mean this position has component(s) ?
 
 	// call `init` method of component
-	component->init();
+	// component->init();
 
 	return component; // may be we can use component
 }
@@ -198,11 +218,12 @@ template<typename T>
 inline T * Entity::getComponent(string name)
 {	
 	// Check type and name exist in entity or not:
-	if (!hasComponent<T>(name))
+	assert(hasComponent<T>(name) && "not exists in this component type");
+	/*if (!hasComponent<T>(name))
 	{
 		throw std::invalid_argument(name + "not exists in this component type");
 		return NULL;
-	}
+	}*/
 
 	// int index = ID::getComponentTypeID<T>(); // Get position of component type
 	int index = ID::ClassID<Component>::getBaseTypeID<T>();
@@ -216,11 +237,12 @@ template<typename T>
 inline bool Entity::removeComponent(string name)
 {
 	// Check type and name exist in entity or not:
-	if (!hasComponent<T>(name))
+	assert(hasComponent<T>(name) && "not exists in this component type");
+	/*if (!hasComponent<T>(name))
 	{
 		throw std::invalid_argument(name + "not exists in this component type");
 		return false;
-	}
+	}*/
 
 	// int index = ID::getComponentTypeID<T>(); // Get position of component type
 
@@ -235,11 +257,13 @@ template<typename T>
 inline bool Entity::removeComponentType()
 {
 	// Check type and name exist in entity or not:
-	if (!hasComponent<T>())
+	assert(hasComponent<T>(name) && "not exists in this component type");
+
+	/*if (!hasComponent<T>())
 	{
 		throw std::invalid_argument("not exists in this component type");
 		return false;
-	}
+	}*/
 
 	// int index = ID::getComponentTypeID<T>(); // Get position of component type
 

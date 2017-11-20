@@ -1,5 +1,5 @@
-﻿#ifndef SCENE_H_
-#define SCENE_H_
+﻿#ifndef GAMEWORLD_H_
+#define GAMEWORLD_H_
 #include <type_traits>
 #include <vector>
 #include "BaseID.h"
@@ -15,7 +15,7 @@ using namespace ID;
 class Entity;
 class ISystem;
 
-class Scene
+class GameWorld
 {
 public:
 
@@ -24,14 +24,14 @@ public:
 	// ==========================================================================================================
 
 	/**
-	*@brief  Add system into the `Scene`
+	*@brief  Add system into the `GameWorld`
 	* T : Type of System 
 	**/
 	template<class T>
 	void addSystem(T& t);
 
 	/**
-	*@brief  Remove system out of the `Scene`
+	*@brief  Remove system out of the `GameWorld`
 	* T : Type of System
 	**/
 	template<class T>
@@ -39,7 +39,7 @@ public:
 
 
 	/**
-	*@brief  Check system exist or not in the `Scene`
+	*@brief  Check system exist or not in the `GameWorld`
 	* T : Type of System
 	**/
 	template<class T>
@@ -47,7 +47,7 @@ public:
 
 
 	/**
-	*@brief  Remove all system in the `Scene`
+	*@brief  Remove all system in the `GameWorld`
 	* T : Type of System
 	**/
 	void clearSystem();
@@ -57,14 +57,14 @@ public:
 	// ==========================================================================================================
 
 	/**
-	*@brief  Create an entity and match it into `Scene`
+	*@brief  Create an entity and match it into `GameWorld`
 	*@return : Entity if use
 	**/
 	template<class T>
 	T* createEntity(string);
 
 	/**
-	*@brief  Remove an entity out of `Scene`
+	*@brief  Remove an entity out of `GameWorld`
 	* + Step 1: Find entity want to remove
 	* + Step 2: Destroy links between `System` and `Entity`
 	* + Step 3: Release cache (cái này khó làm vl)
@@ -75,7 +75,7 @@ public:
 	/**
 	*@brief  When kill an Entity. 
 	*		 The `Entity` and it's `Component` will not be destroyed 
-	*		 until `Update` method in the `Scene` is called 
+	*		 until `Update` method in the `GameWorld` is called 
 	**/
 	void killEntity();
 
@@ -92,35 +92,16 @@ public:
 	Entity* getEntity(std::size_t index);
 
 	// ==========================================================================================================
-	//												Scene method
+	//												GameWorld method
 	// ==========================================================================================================
 
 	/**
 	*@brief  Refresh game 
-	* When you call this method. Scene will automatically specify where `Entity` belong to `System`
+	* When you call this method. GameWorld will automatically specify where `Entity` belong to `System`
 	* Call it before update to refresh game
 	**/
 	void refresh();
 
-	/**
-	*@brief  Init something like create entity, component, system ....
-	**/
-	virtual void init() = 0;
-
-	/**
-	*@brief  Load resource
-	**/
-	virtual void loadResource() = 0;
-
-	/**
-	*@brief  Render the game
-	**/
-	virtual void render() = 0;
-
-	/**
-	*@brief  Important method, update data with delta time
-	**/
-	virtual void update(float dt) = 0;
 
 	/**
 	*@brief  Remove all Entities and Systems 
@@ -137,17 +118,17 @@ public:
 	// ==========================================================================================================
 	//													Constructor
 	// ==========================================================================================================
-	Scene(string name);
-	~Scene();
+	GameWorld(string name);
+	~GameWorld();
 protected:
 	
 	// maybe sence have name
 	string name;
 
-	// 1 scene has many Systems like MovementSystem, AnimationSystem, CollisionSystem, ... 
-	map <BaseID,ISystem>  systems; 
-
-	// 1 scene has many Entity like Samus, Enemy, Background, Grass, ... 
+	// 1 GameWorld has many Systems like MovementSystem, AnimationSystem, CollisionSystem, ... 
+	map < BaseID,std::unique_ptr<ISystem>>  systems; 
+	
+	// 1 GameWorld has many Entity like Samus, Enemy, Background, Grass, ... 
 	// Use map because we have many entity which same type such as:
 	// If we create 2 players Samus 1 and Samus 2 
 	// It still a Samus class but we must create twice
@@ -163,24 +144,24 @@ protected:
 };
 
 
-#endif // !SCENE_H_
+
 
 template<class T>
-inline void Scene::addSystem(T& t)
+inline void GameWorld::addSystem(T& t)
 {
 	// static_assert(is_base_of<ISystem, T>, "T is not inherit from ISystem");
 
 	// ?Kiểm tra 2 lần liên tiếp:
 
-	// Lần 1 nếu scene của nó != NULL nghĩa al2 nó có thể chưa trong cái sence nào hết
-	// Chỉ là có thể thôi vì mình có thể cái scene của nó bằng hàm `setScene` thay đổi	
+	// Lần 1 nếu GameWorld của nó != NULL nghĩa al2 nó có thể chưa trong cái sence nào hết
+	// Chỉ là có thể thôi vì mình có thể cái GameWorld của nó bằng hàm `setGameWorld` thay đổi	
 
 	// hàm assert :
 	// Ví dụ muốn tất cả các chuỗi phái có chiều dài  lớn hơn 10
 	// Nếu nhỏ hơn 10 in ra lỗi "SAi độ dài chuỗi"
 	// assert(strlen(string) > 10, "SAi độ dài chuỗi"); 
 
-	assert(!t.getScene() && "This system has existed");
+	assert(!t.getGameWorld() && "This system has existed");
 
 	// Get the index of system
 	BaseID index = ID::ClassID<ISystem>::getBaseTypeID<T>();
@@ -190,34 +171,34 @@ inline void Scene::addSystem(T& t)
 	// systems.count() : đếm số lần cái giá trị đó có
 	assert(systems.count(index) == 0 , "This system has existed");
 
-	// set scene
-	t.setScene(this);
+	// set GameWorld
+	t.setGameWorld(this);
 
 	// insert it into map
-	systems.insert(pair<BaseID, ISystem>(index, t));
-	
-
+	// systems.insert(pair<BaseID, ISystem>(index, t));
+	//systems[index] = std::make_unique<ISystem>(t);
+	systems[index].reset(&t);
 }
 
 template<class T>
-inline void Scene::removeSystem()
+inline void GameWorld::removeSystem()
 {
 	// Get the index of system
 	BaseID index = ID::ClassID<ISystem>::getBaseTypeID<T>();
-	assert( hasSystem<T>(index) , "This system not exist in scene");
+	assert( hasSystem<T>(index) && "This system not exist in GameWorld");
 
 	systems.erase(index);
 
 }
 
 template<class T>
-inline bool Scene::hasSystem(BaseID index)
+inline bool GameWorld::hasSystem(BaseID index)
 {
 	return systems.find(index) != systems.end();
 }
 
 template<class T>
-inline T * Scene::createEntity(string name)
+inline T * GameWorld::createEntity(string name)
 {
 	static_assert(std::is_base_of<Entity, T>::value, "T not a Entity");
 
@@ -226,3 +207,5 @@ inline T * Scene::createEntity(string name)
 
 	return dynamic_cast<T*>(e); // return entity if use
 }
+
+#endif // !GameWorld_H_

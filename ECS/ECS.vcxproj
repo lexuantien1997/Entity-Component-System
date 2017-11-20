@@ -111,12 +111,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="Base.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="BaseID.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="GameWorld.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="SystemStoreID.h" />
@@ -125,9 +124,8 @@
   <ItemGroup>
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="System.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

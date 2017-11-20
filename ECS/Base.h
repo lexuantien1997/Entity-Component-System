@@ -1,7 +1,11 @@
 #ifndef BASEOBJECT_H_
 #define BASEOBJECT_H_
 
-class BaseObject
+
+/*
+*@brief  This class just an interface, hold some virtual function
+*/
+class Base
 {
 public:
 	virtual void update(float dt) = 0;

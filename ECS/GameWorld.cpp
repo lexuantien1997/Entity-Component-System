@@ -1,64 +1,65 @@
-﻿#include "Scene.h"
+﻿#include "GameWorld.h"
 #include "Entity.h"
 #include "System.h"
 
 
-void Scene::clear()
+void GameWorld::clear()
 {
 	systems.clear();
 
 	entities.clear();
 }
 
-Scene::Scene(string _name):name(_name)
+GameWorld::GameWorld(string _name):name(_name)
 {
 	id = 0;
 }
 
 
-Scene::~Scene()
+GameWorld::~GameWorld()
 {
 }
 
-void Scene::addEntity()
+void GameWorld::addEntity()
 {
 }
 
-void Scene::clearSystem()
+void GameWorld::clearSystem()
 {
 	systems.clear();
 }
 
-void Scene::removeEntity(Entity * entity)
+
+void GameWorld::removeEntity(Entity * entity)
 {
 
 }
 
-void Scene::killEntity()
+void GameWorld::killEntity()
 {
 
 }
 
-void Scene::setActiveEntity(Entity * entity, bool value)
+void GameWorld::setActiveEntity(Entity * entity, bool value)
 {
 	value ? entity->active() : entity->deActive();
 }
 
-bool Scene::isActiveEntity(Entity * entity)
+bool GameWorld::isActiveEntity(Entity * entity)
 {
 	return entity->isAlive();
 }
 
-Entity * Scene::getEntity(std::size_t index)
+Entity * GameWorld::getEntity(std::size_t index)
 {
 	return NULL;
 }
 
-void Scene::refresh()
+void GameWorld::refresh()
 {
 
 	// Duyệt từng `Entity` để thêm từng `Entity` vào `System` phù hợp
-	for (auto it:entities /*it = entities.begin(); it != entities.end(); ++it*/)
+	for (auto &it:entities /*it = entities.begin(); it != entities.end(); ++it*/)
 	{		
 		auto entity = it.second;
 
@@ -66,26 +67,24 @@ void Scene::refresh()
 		if (entity->isAlive())
 		{
 			// Duyệt từng system
-			for ( auto jt : systems)
+			for ( auto& jt : systems)
 			{
 				auto index = jt.first;
-				auto system = jt.second;
+				//auto system = jt.second;
 				// Kiểm tra điều kiện các thành phần `Component` mà `System` cần có trong `Entity` không
 				// Đồng thời cũng kiểm tra các thành phần `Component` yêu cầu không được có , có tồn tại trong `Entity` không
-				if (system.getFilter().doesPassFilter(entity))
+				if (jt.second->getFilter().doesPassFilter(entity))
 				{
 					// Nếu như nó chưa tồn tại trong system và chưa được xét lần nào
 					if (entity->systems.size()<= index || !entity->systems[index])
 					{
-						system.addEntity(entity);
-						systems.find(index)->second = system;
+						jt.second->addEntity(entity);
 						//system.addEntity(entity);
 						if (entity->systems.size() <= index)
 							entity->systems.resize(index + 1);
 
 						entity->systems[index] = true; // Chuyển thành true vì system đã tồn tại trong entity
 					}
-
 					
 				}
 
@@ -95,7 +94,7 @@ void Scene::refresh()
 				// Lúc này thì lần refresh tiếp theo chúng ta phải xóa `Entity` đó ra khỏi `Component`
 				else if (entity->systems.size() >  index && entity->systems[index])
 				{
-					system.removeEntity(entity);
+					jt.second->removeEntity(entity);
 					entity->systems[index] = false;
 				}
 			}

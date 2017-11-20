@@ -1,13 +1,14 @@
 #include "Entity.h"
-#include "Scene.h"
+
+#include "GameWorld.h"
 
 
 
 
-Entity::Entity(string _name,Scene* s)
+Entity::Entity(string _name,GameWorld* s)
 {
 	name = _name;
-	scene = s;
+	gameWorld = s;
 	id = s->getId();
 	s->increaseid();
 	alive = true;

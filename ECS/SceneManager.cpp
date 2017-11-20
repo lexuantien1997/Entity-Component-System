@@ -1,12 +1,12 @@
-#include "SceneManager.h"
+#include "GameWorldManager.h"
 
 
 
-SceneManager::SceneManager()
+GameWorldManager::GameWorldManager()
 {
 }
 
 
-SceneManager::~SceneManager()
+GameWorldManager::~GameWorldManager()
 {
 }

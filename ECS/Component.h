@@ -5,50 +5,57 @@ using namespace std;
 
 class Entity;
 
-/**
-*@brief   Theo Entity-Component-System thì:
-+ Component chỉ là nơi lưu trữ dữ liệu, không làm gì hơn nữa
-+ System là nơi thực hiện các nhiệm vụ logic của game như init, update cho các entity
-+ 1 Entity chứa nhiều component=> là nơi thực hiện nhiệm vụ init , update các component
-+ Scene (bối cảnh) là nơi chứa các Entity và System cần thiết cho 1 cảnh trong game
-+ Scene Manager là nơi quản lý các scene, vì 1 game sẽ só nhiều cảnh như cảnh đánh boss, cảnh kết thúc game, ... => Đây là nơi quản lý, update, init cho các scene
-**/
+// ================================================== Brief ==================================================
+//
+// - Component is used to describe data for an Entity
+// - All components are inherited from the Component class
+// - NOTE: Component only storage data (attributes)
+// Example about compnent:
+//		+ Transform Component : specific position of object in game world
+//		+ Physic Component : velocity, movement,... 
+//		+ Collsion Component : collider
+//		+ Animation Component : sprite, image, gif,...
+//		+ Health Component : blood, mana,...
+//		+ AI Component : the AI brain
+//		+ Camera Component: view, window, ...
+//
+// ===========================================================================================================
 class Component
 {
 private:
-	string name; // name of component -> unique name
-	bool active; // active or deactive
-	Entity* entity; // the parent entity that the component belongs to
+
+	// Name of component -> unique name
+	// Example: We have an Entity is Samus
+	// Samus has velocity, movement, acceleration and they all have the same type: Transform Component
+	// => We must have something like the ID to specify it in the game world => That's why `Name` was generated 
+	string name; 
+	
+	// Now component is active or not (don't care now)
+	bool active;
+
+	// The parent `entity` that the component belongs to
+	Entity* entity; 
 
 public:
+
+	// Constructor pass unique name
 	Component(string name);
 
-	string getName() { return name; }
+	string getName() { return name; } // get name
 
-	bool isActive() { return active; }
+	bool isActive() { return active; } // get current state
 
-	void setActive(bool c) { active = c; }
+	void setActive(bool c) { active = c; } // make it active or deactive
 
-	void setEntity(Entity *entity) { this->entity = entity; }
+	void setEntity(Entity *entity) { this->entity = entity; } // pass the parent entity
 
-	void release();
-
-	void init();
-
-	void update(float dt);
-
-	void draw();
+	void release(); // don't care
 
 	~Component();
 
 protected:
-	virtual void onRelease() { }
+	virtual void onRelease() { } // don't care 
 
-	virtual void onInit(){ }
-
-	virtual void onUpdate(float dt){ }
-
-	virtual void onDraw(){ }
 };
 
 #endif // !COMPONENT
