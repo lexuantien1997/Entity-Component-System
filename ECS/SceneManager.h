@@ -1,13 +1,38 @@
-#ifndef GameWorldMANAGER_H_
-#define GameWorldMANAGER_H_
+#ifndef SCENEMANAGER_H_
+#define SCENEMANAGER_H_
+#include "Singleton.h"
+#include <vector>
 
+class Scene;
 
-class GameWorldManager
+class SceneManager :public Singleton<SceneManager>
 {
+private:
+
+	std::vector<Scene*> scenes;
+
 public:
-	GameWorldManager();
-	~GameWorldManager();
+
+	SceneManager();
+
+	~SceneManager();
+
+	void addScene(Scene* s);
+
+	void removeScene();
+
+	void clear();
+
+	Scene* getCurrentScene();
+
+	void replaceScene(Scene* s);
+
+	void update(float dt);
+
+	void init();
+
+	void render();
+
 };
 
-
-#endif // !GameWorldMANAGER_H_
+#endif

@@ -63,21 +63,31 @@ private:
 	// The unique id for the entity (use that)
 	long id; 
 
+	// The gameworld holds this Entity
 	GameWorld* gameWorld;
 
-	bool alive; // Entity active or not
-	bool init; // Can component init data ? 
+	// Entity active or not
+	bool alive; 
 
-	map<string, Component*> components; // Entity have many components like sprite, animation, camera, ... 
+	bool init; // Can component init data ? (bỏ)
 	
-	// an `Array` hold specific `Component Type`. Each `Array element` has many `Conponent Type` with a a `Key - Value`
+	// an `Array` hold specific `Component Type`.
+	// Each `Array element` has many `Conponent Type` with a a `Key - Value`
 	ComponentArray componentArray; 
+	// above
 	ComponentBitset componentBitSet;
 
 public:
+	// Constructor pass 2 value:
+	// set name and GameWorld for entity
 	Entity(string name,GameWorld* s);
 
-	string getName() { return name; }
+
+	// ============================================================================
+	// Just getter - setter method
+	// ============================================================================
+
+	string getName() { return name; } 
 	bool isAlive() { return alive; }
 	long getId() { return id; }
 	void active() { alive = true; }
@@ -85,19 +95,27 @@ public:
 	void setGameWorld(GameWorld* s) { gameWorld = s; }
 	ComponentBitset getComponentBitset() { return componentBitSet; }
 
+
+	// ============================================================================
+	// Based function
+	// ============================================================================
+
 	/**
 	*@brief     Add component into entity
 	*@param     Args: parameter of component
-	*@typename  T: component
+	*@typename  T: Component Type
+	* Example: addComponent<Transfrom>(0,50,"Movement") -> add component `Transform` with name [Movement] into entity, position (0,50)
+	*		   addComponent<Sprite>("Resource/Samus.png","Image") -> add component `Sprite`	with name [Image] into entity, source `.../Samus.png`
 	*@return	T*: may be we can use the component to do sth
 	*/
 	template <typename T, typename ... Args>
 	T* addComponent(Args&&...arg);
 
 	/**
-	*@brief   Check entity has component with specific `name` or not
-	*@param   componentName: name of Component
-	*@return  True: found | False: not found
+	*@brief     Check entity has component with specific `name` or not
+	*@param     componentName: name of Component
+	*@typename  T : Component type
+	*@return    True: found | False: not found
 	*/
 	template <typename T>
 	bool hasComponent(string componentName);
@@ -117,7 +135,7 @@ public:
 	template<typename T>
 	T* getComponent(string name);
 
-	/**
+	/*Chưa làm*
 	*@brief   Get all component type 
 	* Should use when you know this component is unique
 	*@return  map<string,T*>: all data in specific component type  | NULL: not found
@@ -126,7 +144,7 @@ public:
 	map<string,T*> getComponentType();
 
 	/**
-	*@brief   remove 1 component tin component type
+	*@brief   remove 1 component with name in component type
 	*@return  True: success | false: not success
 	*/
 	template<typename T>
@@ -148,6 +166,8 @@ public:
 	// ============================================================================
 	// Just Advance variable
 	// ============================================================================
+
+	// A variable hold the location of System
 	vector<bool> systems;
 };
 
@@ -156,17 +176,25 @@ template<typename T, typename ...Args>
 inline T* Entity::addComponent(Args && ...arg)
 {
 	// Check `T` is `Component` or not 
+	// static_assert: 
 	 static_assert(std::is_base_of<Component, T>(), "T is not a component");
 
+	 // way 1:
 	//T* component(new T(std::forward<Args>(arg)...));
-	auto component = new T{ std::forward<Args>(arg)... }; // add all  args into constructor
+
+	// add all  args (parameter) into constructor
+	// `auto` like `var` in C#, but `auto` is `faster` than `var`
+	// way 2:
+	 auto component = new T{ std::forward<Args>(arg)... };
 
 
 	// Get unique name of component
 	string componentName = component->getName();
 
 	// Check type and name exist in entity or not:
+	// assert: http://vncoding.net/2015/11/11/ham-assert-danh-gia-bieu-thuc-dau-vao/
 	assert(!hasComponent<T>(componentName) && "existed in this component type");
+
 	/*if (hasComponent<T>(componentName))
 	{
 		throw std::invalid_argument(componentName + "existed in this component type");
@@ -179,31 +207,33 @@ inline T* Entity::addComponent(Args && ...arg)
 	// Pass the entity into component
 	component->setEntity(this);
 
-	// add into map
-	int index = ID::ClassID<Component>::getBaseTypeID<T>(); //ID::getComponentTypeID<T>(); // Get position of component type
+	/// add into map
+
+	// get the index
+	// Get position of component type
+	int index = ID::ClassID<Component>::getBaseTypeID<T>(); 
 	
-	// want to insert into map, we must use std::make_pair
-	componentArray[index].insert(std::pair<string, Component*>(componentName, component)); // insert
+	// Want to insert into map, we must use std::make_pair or std::pair
+	componentArray[index].insert(std::pair<string, Component*>(componentName, component));
 
-	componentBitSet[index] = true; // mean this position has component(s) ?
+	// mean this position has component(s) ?
+	componentBitSet[index] = true; 
 
-	// call `init` method of component
-	// component->init();
-
-	return component; // may be we can use component
+	// may be we can use component
+	return component; 
 }
 template<typename T>
 inline bool Entity::hasComponent(string componentName)
 {
-	// Check component type esist or not 
-	//int index = ID::getComponentTypeID<T>();
+	// Check component type exist or not 
 
 	int index = ID::ClassID<Component>::getBaseTypeID<T>(); // Check component type esist or not 
 
-
+	// Check the Component type has the element or not
 	bool check=componentBitSet[index];
+
 	// may be not a good way to find map
-	if (check) // if Component type exists
+	if (check) // if element in Component type exists
 		return componentArray[index].find(componentName) != componentArray[index].end() ? true : false;	
 	return false;
 }
@@ -214,23 +244,22 @@ inline bool Entity::hasComponent()
 	// return componentBitSet[ID::getComponentTypeID<T>()];
 	return componentBitSet[ID::ClassID<Component>::getBaseTypeID<T>()];
 }
+
+
 template<typename T>
 inline T * Entity::getComponent(string name)
 {	
 	// Check type and name exist in entity or not:
 	assert(hasComponent<T>(name) && "not exists in this component type");
-	/*if (!hasComponent<T>(name))
-	{
-		throw std::invalid_argument(name + "not exists in this component type");
-		return NULL;
-	}*/
 
 	// int index = ID::getComponentTypeID<T>(); // Get position of component type
 	int index = ID::ClassID<Component>::getBaseTypeID<T>();
 
 
 	// ép kiểu
-	return dynamic_cast<T*>(componentArray[index].at(name));
+	// dynamic|static_cast: https://www.stdio.vn/articles/read/102/type-casting-trong-c
+	//return dynamic_cast<T*>(componentArray[index].at(name));
+	return static_cast<T*>(componentArray[index].at(name));
 }
 
 template<typename T>
@@ -238,18 +267,11 @@ inline bool Entity::removeComponent(string name)
 {
 	// Check type and name exist in entity or not:
 	assert(hasComponent<T>(name) && "not exists in this component type");
-	/*if (!hasComponent<T>(name))
-	{
-		throw std::invalid_argument(name + "not exists in this component type");
-		return false;
-	}*/
 
-	// int index = ID::getComponentTypeID<T>(); // Get position of component type
+	// Get position of component type
+	int index = ID::ClassID<Component>::getBaseTypeID<T>(); 
 
-	int index = ID::ClassID<Component>::getBaseTypeID<T>(); // Get position of component type
-
-	// dynamic_cast<T*>(componentArray[index].at(name))->release(); // release component
-
+	// remove component -> true: success | false : fail
 	return componentArray[index].erase(name);
 }
 
@@ -259,20 +281,16 @@ inline bool Entity::removeComponentType()
 	// Check type and name exist in entity or not:
 	assert(hasComponent<T>(name) && "not exists in this component type");
 
-	/*if (!hasComponent<T>())
-	{
-		throw std::invalid_argument("not exists in this component type");
-		return false;
-	}*/
+	// Get position of component type
+	int index = ID::ClassID<Component>::getBaseTypeID<T>(); 
 
-	// int index = ID::getComponentTypeID<T>(); // Get position of component type
+	// clear all data
+	componentArray[index].clear(); 
 
-	int index = ID::ClassID<Component>::getBaseTypeID<T>(); // Get position of component type
+	// mean this position has component(s) ?
+	componentBitSet[index] = false; 
 
-	componentArray[index].clear(); // clear all data
-
-	componentBitSet[index] = false; // mean this position has component(s) ?
-
+	// if the size = 0 -> clear all success
 	return componentArray[index].size() == 0;
 }
 

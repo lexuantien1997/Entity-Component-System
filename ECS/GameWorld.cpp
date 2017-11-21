@@ -10,7 +10,7 @@ void GameWorld::clear()
 	entities.clear();
 }
 
-GameWorld::GameWorld(string _name):name(_name)
+GameWorld::GameWorld()
 {
 	id = 0;
 }
@@ -35,10 +35,6 @@ void GameWorld::removeEntity(Entity * entity)
 
 }
 
-void GameWorld::killEntity()
-{
-
-}
 
 void GameWorld::setActiveEntity(Entity * entity, bool value)
 {

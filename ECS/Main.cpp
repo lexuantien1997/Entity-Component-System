@@ -156,6 +156,51 @@ public:
 	void loadResource() { }
 };
 
+class MovementSystem : public Base, public System <Require<Transform, Transform>, Exclude<>>
+{
+public:
+	MovementSystem()
+	{
+
+	}
+
+	void _collision(int a, int b, int c, int d)
+	{
+		// code cái gì đó trong đây
+	}
+
+	void init()
+	{
+
+	}
+
+	// Update the game
+	void update(float dt)
+	{
+
+	}
+
+	void render() 
+	{
+		for (auto entity : getEntities())
+		{
+			int x, y, cx, cy;
+
+			// Lấy vị trí của các entity trong GameWorld
+			x = entity->getComponent<Transform>("Position")->x;
+			y = entity->getComponent<Transform>("Position")->y;
+
+			// Lấy vị trí va chạm
+			cx = entity->getComponent<Collision>("Collision")->ca;
+			cy = entity->getComponent<Collision>("Collision")->cb;
+
+			_collision(x, y, cx, cy); // gọi hàm va chạm ra dùng
+		}
+	} // có thì code ko có thì để đó
+
+	void loadResource() { }
+};
+
 // ==============================================================================================================
 
 class Ground :public Entity
@@ -213,14 +258,16 @@ class Game :public Base
 {
 private:
 
-	GameWorld* s=new GameWorld("Demo GameWorld");
+	GameWorld* s=new GameWorld();
 	// Tạo các entity (xài tạm cái này, tại chưa tạo cái hàm tìm kiếm entity trong `GameWorld` theo id hoặc name)
 	Enemy* enemy;
 	Samus* samus;
 	Ground* ground;
 
+	MovementSystem movementSystem;
 	CollisionSystem colisionSystem;
 	RenderSystem renderSystem;
+	
 public:
 
 	void update(float dt)
@@ -231,6 +278,7 @@ public:
 
 	void render()
 	{
+		movementSystem.render();
 		renderSystem.render();
 		colisionSystem.render();
 	}
@@ -251,6 +299,8 @@ public:
 		ground->initialize();
 
 		// ================= Các System có trong demo GameWorld ==================
+
+		s->addSystem(movementSystem);
 
 		s->addSystem(colisionSystem);
 
@@ -288,11 +338,11 @@ void main()
 
 
 	bool isRunning = true;
-	int dt = 0.05, maxdelta = 0.15;
+	float dt = 0.05, maxdelta = 0.15;
 	while (isRunning)
 	{
 
-		if (/*press esc*/ 1) isRunning = false;
+		// if (/*press esc*/ 1) isRunning = false;
 
 		// Tính toán delta time
 		if (dt < maxdelta)

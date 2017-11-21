@@ -13,51 +13,84 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Base hierarchy">
+      <UniqueIdentifier>{e780c44a-e5fe-451d-a3c6-5bab5d58b310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base hierarchy">
+      <UniqueIdentifier>{b350032e-307c-43f3-934b-9d21c422f538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base hierarchy\ECS">
+      <UniqueIdentifier>{777f01a0-4845-4b2e-b0d7-2503aa5a5981}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base hierarchy\Singleton">
+      <UniqueIdentifier>{1e6e199d-58d9-465d-8386-a7bb65248640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base hierarchy\Scene">
+      <UniqueIdentifier>{243286d5-1613-44df-8988-91de507adf4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base hierarchy\ECS">
+      <UniqueIdentifier>{48c88438-9ce8-4f71-a9f1-57df85a2a31d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base hierarchy\Scene">
+      <UniqueIdentifier>{8793a1bb-6cd5-4f02-8810-40fa156082dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Frame work">
+      <UniqueIdentifier>{9770b4f7-6322-47a0-9a7f-8ebab5e7eab0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Frame work">
+      <UniqueIdentifier>{0c8712af-9a7e-4014-8672-b52b8ea32b74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Singleton.h">
+      <Filter>Header Files\Base hierarchy\Singleton</Filter>
+    </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Typedefs.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Base hierarchy\ECS</Filter>
     </ClInclude>
     <ClInclude Include="BaseID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemStoreID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="System.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Base hierarchy\ECS</Filter>
     </ClInclude>
     <ClInclude Include="GameWorld.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Base hierarchy\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\Base hierarchy\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Header Files\Base hierarchy\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemStoreID.h">
+      <Filter>Header Files\Base hierarchy\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files\Base hierarchy\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files\Base hierarchy\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Base.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Base hierarchy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="System.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\Base hierarchy\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Base hierarchy\ECS</Filter>
+    </ClCompile>
     <ClCompile Include="GameWorld.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Base hierarchy\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>Source Files\Base hierarchy\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files\Base hierarchy\Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

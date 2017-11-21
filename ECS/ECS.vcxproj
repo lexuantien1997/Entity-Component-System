@@ -116,16 +116,18 @@
     <ClInclude Include="BaseID.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameWorld.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="SystemStoreID.h" />
-    <ClInclude Include="Typedefs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameWorld.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="System.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

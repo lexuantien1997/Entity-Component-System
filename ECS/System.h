@@ -11,6 +11,13 @@ class Entity;
 * This is just a trick. Because `System` has a template in front of 
 * => You can't use it to count id or use std::is_base_of
 */
+
+// =================================================== Brief ====================================================
+//	- System is where defides the logic for particular parts (components) of your game
+//	- Example
+//
+//
+
 class ISystem
 {
 private:

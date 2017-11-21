@@ -15,6 +15,17 @@ using namespace ID;
 class Entity;
 class ISystem;
 
+
+// ================================================= Brief ======================================================
+//
+//	- Game world is an Entity System, We call that name because it holds entities and systems
+//	- Things you can do with `GameWorld`:
+//			+ createEntity : create an entity
+//			+ addSystem | removeSystem : add or remove system
+//			+ getEntity : find and get the entity in the game world
+//			+ hasSystem : check if system exist
+//
+// ==============================================================================================================			
 class GameWorld
 {
 public:
@@ -63,21 +74,12 @@ public:
 	template<class T>
 	T* createEntity(string);
 
-	/**
+	/*Chưa làm*
 	*@brief  Remove an entity out of `GameWorld`
 	* + Step 1: Find entity want to remove
 	* + Step 2: Destroy links between `System` and `Entity`
-	* + Step 3: Release cache (cái này khó làm vl)
 	**/
 	void removeEntity(Entity* entity);
-
-
-	/**
-	*@brief  When kill an Entity. 
-	*		 The `Entity` and it's `Component` will not be destroyed 
-	*		 until `Update` method in the `GameWorld` is called 
-	**/
-	void killEntity();
 
 	/**
 	*@brief  Make Entity active or not
@@ -86,7 +88,7 @@ public:
 
 	bool isActiveEntity(Entity* entity);
 
-	/**
+	/*Chưa làm*
 	*@brief  Get specific Entity with index
 	**/
 	Entity* getEntity(std::size_t index);
@@ -118,14 +120,13 @@ public:
 	// ==========================================================================================================
 	//													Constructor
 	// ==========================================================================================================
-	GameWorld(string name);
+	GameWorld();
 	~GameWorld();
+
 protected:
 	
-	// maybe sence have name
-	string name;
-
 	// 1 GameWorld has many Systems like MovementSystem, AnimationSystem, CollisionSystem, ... 
+	// unique_ptr: https://www.stdio.vn/articles/read/92/c11-smart-pointers-quan-ly-tai-nguyen
 	map < BaseID,std::unique_ptr<ISystem>>  systems; 
 	
 	// 1 GameWorld has many Entity like Samus, Enemy, Background, Grass, ... 
@@ -135,7 +136,8 @@ protected:
 	// Another example : more enemies in your game
 	map <long, Entity*> entities; 
 
-	long id; // The id for entity
+	// The id for entity
+	long id; 
 
 	// =============== Add entity =====================
 
@@ -153,7 +155,7 @@ inline void GameWorld::addSystem(T& t)
 
 	// ?Kiểm tra 2 lần liên tiếp:
 
-	// Lần 1 nếu GameWorld của nó != NULL nghĩa al2 nó có thể chưa trong cái sence nào hết
+	// Lần 1 nếu GameWorld của nó != NULL nghĩa là nó có thể chưa trong cái sence nào hết
 	// Chỉ là có thể thôi vì mình có thể cái GameWorld của nó bằng hàm `setGameWorld` thay đổi	
 
 	// hàm assert :
@@ -177,6 +179,7 @@ inline void GameWorld::addSystem(T& t)
 	// insert it into map
 	// systems.insert(pair<BaseID, ISystem>(index, t));
 	//systems[index] = std::make_unique<ISystem>(t);
+	// Tự động ghi đè dữ liệu lên các con trỏ
 	systems[index].reset(&t);
 }
 
@@ -185,10 +188,10 @@ inline void GameWorld::removeSystem()
 {
 	// Get the index of system
 	BaseID index = ID::ClassID<ISystem>::getBaseTypeID<T>();
+
 	assert( hasSystem<T>(index) && "This system not exist in GameWorld");
 
 	systems.erase(index);
-
 }
 
 template<class T>
@@ -202,10 +205,13 @@ inline T * GameWorld::createEntity(string name)
 {
 	static_assert(std::is_base_of<Entity, T>::value, "T not a Entity");
 
-	T *e = new T(name, this); // create an entity
-	entities.insert(pair<long, Entity*>(e->getId(), e)); // insert it into map
-
-	return dynamic_cast<T*>(e); // return entity if use
+	// create an entity
+	T *e = new T(name, this); 
+	// insert it into map
+	entities.insert(pair<long, Entity*>(e->getId(), e)); 
+	
+	// return entity if use
+	return static_cast<T*>(e);
 }
 
 #endif // !GameWorld_H_
