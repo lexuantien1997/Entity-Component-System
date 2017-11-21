@@ -161,7 +161,7 @@ public:
 
 	~Entity();
 
-	virtual void initialize() = 0;
+	virtual void initialize() {}
 
 	// ============================================================================
 	// Just Advance variable

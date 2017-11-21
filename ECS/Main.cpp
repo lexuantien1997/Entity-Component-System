@@ -292,6 +292,8 @@ public:
 		enemy = s->createEntity<Enemy>("Enemy 1");
 		ground = s->createEntity<Ground>("Ground");
 
+		 Entity *e = s->create_Entity("Hello");
+
 		//======================== init entity ==============================
 
 		samus->initialize();
@@ -345,7 +347,7 @@ void main()
 		// if (/*press esc*/ 1) isRunning = false;
 
 		// Tính toán delta time
-		if (dt < maxdelta)
+		while (dt < maxdelta)
 		{
 			// update
 			demoGameWorld->update(0.01);

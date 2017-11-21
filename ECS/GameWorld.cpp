@@ -30,6 +30,17 @@ void GameWorld::clearSystem()
 }
 
 
+Entity * GameWorld::create_Entity(string name)
+{
+	// create an entity
+	Entity *e = new Entity(name, this);
+	// insert it into map
+	entities.insert(pair<long, Entity*>(e->getId(), e));
+
+	// return entity if use
+	return e;
+}
+
 void GameWorld::removeEntity(Entity * entity)
 {
 

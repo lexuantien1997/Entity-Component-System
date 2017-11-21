@@ -15,9 +15,8 @@ public:
 		return instance;
 	}
 private:
-	static T* instance = nullptr;
+	static constexpr T* instance = nullptr;
 protected:
-	Singleton(){ }
 	~Singleton(){ }
 };
 

@@ -74,6 +74,8 @@ public:
 	template<class T>
 	T* createEntity(string);
 
+	Entity* create_Entity(string);
+
 	/*Chưa làm*
 	*@brief  Remove an entity out of `GameWorld`
 	* + Step 1: Find entity want to remove

@@ -53,6 +53,8 @@ public:
 
 	~Component();
 
+	virtual void init(){ }
+
 protected:
 	virtual void onRelease() { } // don't care 
 
