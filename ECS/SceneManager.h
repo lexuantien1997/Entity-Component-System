@@ -8,9 +8,7 @@ class Scene;
 class SceneManager :public Singleton<SceneManager>
 {
 private:
-
 	std::vector<Scene*> scenes;
-
 public:
 
 	SceneManager();
@@ -33,6 +31,7 @@ public:
 
 	void render();
 
+	void release();
 };
 
 #endif

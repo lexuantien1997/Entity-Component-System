@@ -55,9 +55,6 @@ public:
 
 	virtual void init(){ }
 
-protected:
-	virtual void onRelease() { } // don't care 
-
 };
 
 #endif // !COMPONENT

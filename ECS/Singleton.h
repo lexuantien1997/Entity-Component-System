@@ -4,20 +4,26 @@
 /**
 *@brief  Just a base class about Singleton pattern
 **/
+
 template<class T>
 class Singleton
 {
 public:
-	static T* getInstance()
+	static  T* getInstance()
 	{
-		if (instance == nullptr)
+		if (!instance)
 			instance = new T();
 		return instance;
-	}
+	} 
 private:
-	static constexpr T* instance = nullptr;
+	static T* instance;
 protected:
+	Singleton(){}
 	~Singleton(){ }
 };
+
+template <class T>
+T* Singleton<T>::instance = nullptr;
+
 
 #endif // !SINGLETON_H

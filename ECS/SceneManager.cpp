@@ -63,3 +63,13 @@ void SceneManager::render()
 	if (!scenes.empty())
 		scenes.back()->render();
 }
+
+void SceneManager::release()
+{
+	for (auto scene :scenes)
+	{
+		scene->release();
+	}
+
+	clear();
+}

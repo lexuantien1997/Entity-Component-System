@@ -1,0 +1,27 @@
+#ifndef STATE_H_
+#define STATE_H_
+
+
+enum SamusState
+{
+	NO_STATE = 0,
+
+	RUN_RIGHT=1,
+	
+	RUN_RIGHT_TO_SHOOT_RIGHT=2,
+	
+	RUN_RIGHT_TO_SHOOT_UP=3,
+
+	JUMP_RIGHT=4,
+
+	JUMP_RIGHT_TO_SHOOT_RIGHT=5,
+
+	JUMP_RIGHT_TO_SHOOT_UP=6,
+
+	ROLLING_RIGHT=7,
+
+	TURNING_RIGHT=8
+
+};
+
+#endif // !STATE_H_

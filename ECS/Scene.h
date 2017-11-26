@@ -7,21 +7,24 @@ class Scene
 {
 
 private:
-	GameWorld *world;
 
 	string name;
 
 public:
 
+	GameWorld *world;
+
 	Scene(string _name) :name(_name), world(new GameWorld()) {  }
 
-	~Scene() { }
+	~Scene() { }	
 
 	virtual void update(float dt) = 0;
 	
 	virtual void init() = 0;
 
 	virtual void render() = 0;
+
+	virtual void release() { };
 
 };
 

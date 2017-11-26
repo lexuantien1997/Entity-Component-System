@@ -13,11 +13,38 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Frame work">
+      <UniqueIdentifier>{9770b4f7-6322-47a0-9a7f-8ebab5e7eab0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Frame work">
+      <UniqueIdentifier>{0c8712af-9a7e-4014-8672-b52b8ea32b74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Frame work\Manager">
+      <UniqueIdentifier>{6235b1cc-d420-4782-b619-e12d5b2ff881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Frame work\Manager">
+      <UniqueIdentifier>{a135f6d6-12d2-4e1a-964d-3ef42c1780b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Frame work\Core">
+      <UniqueIdentifier>{a6e2863c-e724-491e-a093-e0e2ea495c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Frame work\Core">
+      <UniqueIdentifier>{2a4f7188-aa6a-483c-b81a-755cf3ff496f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Frame work\Core\Systems">
+      <UniqueIdentifier>{7185d8e8-1b02-4b29-84bd-0e3e83f2e631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Frame work\Core\Components">
+      <UniqueIdentifier>{3a3b4224-d636-40e8-9c3a-13056c533dc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Frame work\Core\Components">
+      <UniqueIdentifier>{0b1a6329-5f38-4f81-850f-db5266ce167a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Frame work\Core\Systems">
+      <UniqueIdentifier>{38602115-cb59-4435-a2b0-6fd9a7ed0bcb}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\Base hierarchy">
       <UniqueIdentifier>{e780c44a-e5fe-451d-a3c6-5bab5d58b310}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Base hierarchy">
-      <UniqueIdentifier>{b350032e-307c-43f3-934b-9d21c422f538}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Base hierarchy\ECS">
       <UniqueIdentifier>{777f01a0-4845-4b2e-b0d7-2503aa5a5981}</UniqueIdentifier>
@@ -28,17 +55,20 @@
     <Filter Include="Header Files\Base hierarchy\Scene">
       <UniqueIdentifier>{243286d5-1613-44df-8988-91de507adf4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Base hierarchy">
+      <UniqueIdentifier>{b350032e-307c-43f3-934b-9d21c422f538}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\Base hierarchy\ECS">
       <UniqueIdentifier>{48c88438-9ce8-4f71-a9f1-57df85a2a31d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Base hierarchy\Scene">
       <UniqueIdentifier>{8793a1bb-6cd5-4f02-8810-40fa156082dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Frame work">
-      <UniqueIdentifier>{9770b4f7-6322-47a0-9a7f-8ebab5e7eab0}</UniqueIdentifier>
+    <Filter Include="Source Files\Base hierarchy\Scene\Example Scene">
+      <UniqueIdentifier>{fcef5de5-9c30-45db-bae3-d13a06c4e0f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Frame work">
-      <UniqueIdentifier>{0c8712af-9a7e-4014-8672-b52b8ea32b74}</UniqueIdentifier>
+    <Filter Include="Source Files\Base hierarchy\ECS Example">
+      <UniqueIdentifier>{6e891112-94bb-4ba5-ac5d-e6b34f7ebe34}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,11 +102,65 @@
     <ClInclude Include="Base.h">
       <Filter>Header Files\Base hierarchy</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files\Frame work\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceManager.h">
+      <Filter>Header Files\Frame work\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowManager.h">
+      <Filter>Header Files\Frame work\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowResolution.h">
+      <Filter>Header Files\Frame work\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayingScene.h">
+      <Filter>Source Files\Base hierarchy\Scene\Example Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Frame work\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MetroidGame.h">
+      <Filter>Header Files\Frame work\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Header Files\Frame work\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files\Frame work\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteManager.h">
+      <Filter>Header Files\Frame work\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Frame work\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\Frame work\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderingSystem.h">
+      <Filter>Header Files\Frame work\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Velocity.h">
+      <Filter>Header Files\Frame work\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementSystem.h">
+      <Filter>Header Files\Frame work\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerControllable.h">
+      <Filter>Header Files\Frame work\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Header Files\Frame work\Core\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Source Files\Base hierarchy\ECS</Filter>
     </ClCompile>
@@ -89,8 +173,62 @@
     <ClCompile Include="System.cpp">
       <Filter>Source Files\Base hierarchy\ECS</Filter>
     </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\Frame work\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowResolution.cpp">
+      <Filter>Source Files\Frame work\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowManager.cpp">
+      <Filter>Source Files\Frame work\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceManager.cpp">
+      <Filter>Source Files\Frame work\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayingScene.cpp">
+      <Filter>Source Files\Base hierarchy\Scene\Example Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files\Base hierarchy\ECS Example</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Frame work\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="MetroidGame.cpp">
+      <Filter>Source Files\Frame work\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Frame work\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files\Frame work\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteManager.cpp">
+      <Filter>Source Files\Frame work\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Frame work\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderingSystem.cpp">
+      <Filter>Source Files\Frame work\Core\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementSystem.cpp">
+      <Filter>Source Files\Frame work\Core\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Velocity.cpp">
+      <Filter>Source Files\Frame work\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerControllable.cpp">
+      <Filter>Source Files\Frame work\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>Source Files\Frame work\Core\Systems</Filter>
+    </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Source Files\Base hierarchy\Scene</Filter>
+      <Filter>Source Files\Base hierarchy\Scene\Example Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

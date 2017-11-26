@@ -1,0 +1,22 @@
+#ifndef _DEFINE_H_
+#define _DEFINE_H_
+
+//
+// Screen resolution
+//
+#define GAME_SCREEN_RESOLUTION_640_480_24   0
+#define GAME_SCREEN_RESOLUTION_800_600_24   1
+#define GAME_SCREEN_RESOLUTION_1024_768_24  2
+
+#define GAME_SCREEN_RESOLUTION_640_480_32   10
+#define GAME_SCREEN_RESOLUTION_800_600_32   11
+#define GAME_SCREEN_RESOLUTION_1024_768_32  12
+
+
+
+//
+// Keyboad iput 
+//
+#define KEYBOARD_BUFFER_SIZE	1024
+
+#endif
