@@ -7,13 +7,13 @@ Event::Event(EventId id)
 	this->Id = id;
 }
 
-void Event::send()
+void Event::send(string func)
 {
-	for (auto it =listeners.begin(); it !=listeners.end(); ++it)
+	for (auto it = listeners.begin(); it != listeners.end(); ++it)
 	{
 		EventHandler* eventHandler = *it;
-
-		eventHandler->HandleEvent(this);
+		
+		eventHandler->HandleEvent(this, func);
 	}
 }
 
@@ -23,7 +23,7 @@ void Event::sentToHandler(EventHandler* eventHandler)
 	{
 		if (eventHandler == *it)
 		{
-			eventHandler->HandleEvent(this);
+			// eventHandler->HandleEvent(this);
 		}
 	}
 }

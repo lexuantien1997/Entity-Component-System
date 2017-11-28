@@ -23,7 +23,7 @@ void InputSystem::update(float dt)
 		else if (input->isKeyDown(playerContr->directions.left, KeyState::current))
 		{
 			velocity->getVelocity(VelocityType::normal).x = -velocity->speed;
-			EventManager::getInstance()->sendEvent(EventId::MOVE_LEFT);
+			EventManager::getInstance()->sendEvent(EventId::MOVE_LEFT,"Normal");
 		}
 
 

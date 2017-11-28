@@ -32,7 +32,7 @@ public:
 
 	~AnimationSystem();
 
-	void HandleEvent(Event* pEvent);
+	void HandleEvent(Event* pEvent,std::string func);
 };
 
 #endif // !ANIMATIONSYSTEM_H_

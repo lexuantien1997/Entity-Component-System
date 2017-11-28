@@ -18,7 +18,7 @@ public:
 
 	Event(EventId id);
 
-	void send();
+	void send(std::string a);
 
 	void sentToHandler(EventHandler* eventHandler);
 

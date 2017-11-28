@@ -13,7 +13,7 @@ private:
 	map<EventId, Event*> eventMap;
 public:
 	
-	void sendEvent(EventId id);
+	void sendEvent(EventId id, std::string func);
 
 	void sendEventIdToHandler(EventId Id, EventHandler* eventHandler);
 

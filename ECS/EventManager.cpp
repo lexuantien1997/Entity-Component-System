@@ -2,13 +2,13 @@
 
 
 
-void EventManager::sendEvent(EventId id)
+void EventManager::sendEvent(EventId id,string func)
 {
 	auto result = eventMap.find(id);
 
 	if (result!=eventMap.end())
 	{
-		result->second->send();
+		result->second->send(func);
 	}
 }
 

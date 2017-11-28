@@ -46,7 +46,7 @@ AnimationSystem::~AnimationSystem()
 {
 }
 
-void AnimationSystem::HandleEvent(Event * pEvent)
+void AnimationSystem::HandleEvent(Event * pEvent,string func)
 {
 
 }
