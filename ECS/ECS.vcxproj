@@ -78,6 +78,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Documents\GitHub\Metroid\Metroid\rapid xml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -117,13 +118,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="AnimationSystem.h" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="BaseID.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventHandler.h" />
+    <ClInclude Include="EventId.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObjectId.h" />
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InputSystem.h" />
@@ -148,9 +156,13 @@
     <ClInclude Include="WindowResolution.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimationSystem.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InputSystem.cpp" />

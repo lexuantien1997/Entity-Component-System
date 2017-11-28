@@ -70,6 +70,12 @@
     <Filter Include="Source Files\Base hierarchy\ECS Example">
       <UniqueIdentifier>{6e891112-94bb-4ba5-ac5d-e6b34f7ebe34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Event">
+      <UniqueIdentifier>{ffffc1e1-d53b-44e9-83e0-f802cd404db2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Event">
+      <UniqueIdentifier>{196accbe-49db-4e2e-ad0f-9cd222e77464}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -159,6 +165,27 @@
     <ClInclude Include="InputSystem.h">
       <Filter>Header Files\Frame work\Core\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="GameObjectId.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\Frame work\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationSystem.h">
+      <Filter>Header Files\Frame work\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Header Files\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandler.h">
+      <Filter>Header Files\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventId.h">
+      <Filter>Header Files\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Header Files\Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component.cpp">
@@ -229,6 +256,18 @@
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files\Base hierarchy\Scene\Example Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

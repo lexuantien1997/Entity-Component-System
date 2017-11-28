@@ -1,5 +1,5 @@
-#include "InputSystem.h"
-
+﻿#include "InputSystem.h"
+#include "EventManager.h"
 
 
 void InputSystem::update(float dt)
@@ -10,23 +10,23 @@ void InputSystem::update(float dt)
 		auto playerContr = entity->getComponent<PlayerControllable>("player controllable 1");
 		auto velocity = entity->getComponent<Velocity>("velocity 1");
 
+		velocity->initVelocity(Vector2f(0, 0), Vector2f(0, 0));
+
 		// Get the input class
 		auto input = InputManager::getInstance();
 
-		// Check jump action is pressed or not
-		bool checkJump = input->isKeyDown(playerContr->actions.jumping, KeyState::current);
 
-		if (input->isKeyDown(playerContr->directions.right,KeyState::current))
+		if (input->isKeyDown(playerContr->directions.right, KeyState::current))
 		{
-			velocity->getVelocity(VelocityType::normal).x = playerContr->velocity;
-		}
+			velocity->getVelocity(VelocityType::normal).x = velocity->speed;
+		}		
 		else if (input->isKeyDown(playerContr->directions.left, KeyState::current))
 		{
-			velocity->getVelocity(VelocityType::normal).x = -playerContr->velocity;
+			velocity->getVelocity(VelocityType::normal).x = -velocity->speed;
+			EventManager::getInstance()->sendEvent(EventId::MOVE_LEFT);
 		}
 
-		// if (checkJump)
-			// velocity->getVelocity(VelocityType::normal).y = playerContr->gravity;
+
 	}
 }
 

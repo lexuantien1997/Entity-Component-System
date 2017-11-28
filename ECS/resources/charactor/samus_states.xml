@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<States>
+
+	<!--BASE STATE-->
+	<State name="no_state">
+		<sprite x="184" y="36" w="18" h="34"/>
+	</State>
+	
+	<!--RUN-->
+	<State name="run_right">
+		<sprite x="244" y="36" w="17" h="33"/>
+		<Sprite x="283" y="36" w="19" h="34"/>
+		<Sprite x="322" y="36" w="22" h="34"/>
+	</State>
+
+	<State name="run_left">
+		<sprite x="124" y="36" w="17" h="33"/>
+		<Sprite x="83" y="36" w="20" h="34"/>
+		<Sprite x="41" y="36" w="23" h="34"/>
+	</State>
+	
+	<!--JUMP-->
+	<State name="jump_right">
+		<Sprite x="363" y="39" w="20" h="27"/>
+	</State>
+	
+	<State name="jump_left">
+		<Sprite x="3" y="39" w="20" h="27"/>
+	</State>
+	
+	<!--STAND-->
+	<State name="stand_right">
+		<Sprite x="202" y="76" w="21" h="34"/>
+	</State>
+	
+	<State name="stand_left">
+		<Sprite x="162" y="76" w="21" h="34"/>
+	</State>
+	
+	<!--RUN && SHOOT STRAIGHT-->
+	<State name="run_right_shoot_right">
+		<Sprite x="242" y="76" w="22" h="33"/>
+		<Sprite x="281" y="76" w="24" h="33"/>
+		<Sprite x="319" y="76" w="27" h="33"/>
+	</State>
+	
+	<State name="run_left_shoot_left">
+		<Sprite x="122" y="76" w="22" h="33"/>
+		<Sprite x="81" y="76" w="24" h="33"/>
+		<Sprite x="39" y="76" w="27" h="33"/>
+	</State>
+	
+	<!--JUMP && SHOOT STRAIGHT-->
+	<State name="jump_shoot_right">
+		<Sprite x="360" y="79" w="25" h="27"/>
+	</State>
+	
+	<State name="jump_shoot_left">
+		<Sprite x="0" y="79" w="25" h="27"/>
+	</State>
+	
+	<!--STAND && SHOOT UP-->
+	<State name="stand_right_shoot_up">
+		<Sprite x="205" y="113" w="16" h="40"/>
+	</State>
+	
+	<State name="stand_left_shoot_up">
+		<Sprite x="165" y="113" w="16" h="40"/>
+	</State>
+	
+	<!--RUN && SHOOT UP-->
+	<State name="run_right_shoot_up">
+		<Sprite x="146" y="113" w="14" h="40"/>
+		<Sprite x="283" y="113" w="19" h="40"/>
+		<Sprite x="322" y="113" w="21" h="40"/>
+	</State>
+	
+	<State name="run_left_shoot_up">
+		<Sprite x="126" y="113" w="14" h="40"/>
+		<Sprite x="83" y="113" w="19" h="40"/>
+		<Sprite x="42" y="113" w="21" h="40"/>
+	</State>
+	
+	<!--JUMP && SHOOT UP-->
+	<State name="jump_right_shoot_up">
+		<Sprite x="363" y="116" w="20" h="34"/>
+	</State>
+	
+	<State name="jump_left_shoot_up">
+		<Sprite x="3" y="116" w="20" h="34"/>
+	</State>
+	
+	<!--ROLLING-->
+	<State name="rolling_right">
+		<Sprite x="201" y="165" w="14" h="15"/>
+		<Sprite x="231" y="165" w="14" h="15"/>
+	</State>
+	
+	<State name="rolling_left">
+		<Sprite x="171" y="165" w="14" h="15"/>
+		<Sprite x="141" y="165" w="14" h="15"/>
+	</State>
+	
+	<!--TURNING-->
+	<State name="turning_right">
+		<Sprite x="272" y="164" w="21" h="17"/>
+		<Sprite x="305" y="160" w="16" h="25"/>
+		<Sprite x="332" y="164" w="21" h="17"/>
+		<Sprite x="365" y="160" w="16" h="25"/>
+	</State>
+	
+	<State name="turning_left">
+		<Sprite x="92" y="164" w="21" h="17"/>
+		<Sprite x="65" y="160" w="16" h="25"/>
+		<Sprite x="32" y="164" w="21" h="17"/>
+		<Sprite x="5" y="160" w="16" h="25"/>
+	</State>
+	
+</States>

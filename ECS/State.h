@@ -4,23 +4,37 @@
 
 enum SamusState
 {
-	NO_STATE = 0,
+	no_state = 0,
 
-	RUN_RIGHT=1,
-	
-	RUN_RIGHT_TO_SHOOT_RIGHT=2,
-	
-	RUN_RIGHT_TO_SHOOT_UP=3,
+	run_right = 1,
+	run_left = 2,
 
-	JUMP_RIGHT=4,
+	jump_right = 3,
+	jump_left = 4,
 
-	JUMP_RIGHT_TO_SHOOT_RIGHT=5,
+	stand_right = 5,
+	stand_left = 6,
 
-	JUMP_RIGHT_TO_SHOOT_UP=6,
+	run_right_shoot_right = 7,
+	run_left_shoot_left = 8,
 
-	ROLLING_RIGHT=7,
+	jump_shoot_right = 9,
+	jump_shoot_left = 10,
 
-	TURNING_RIGHT=8
+	stand_right_shoot_up = 11,
+	stand_left_shoot_up = 12,
+
+	run_right_shoot_up = 13,
+	run_left_shoot_up = 14,
+
+	jump_right_shoot_up = 15,
+	jump_left_shoot_up = 16,
+
+	rolling_right = 17,
+	rolling_left = 18,
+
+	turning_right = 19,
+	turning_left = 20
 
 };
 

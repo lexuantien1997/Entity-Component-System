@@ -4,7 +4,7 @@
 
 PlayerControllable::PlayerControllable(string name):
 	Component(name),
-	state(SamusState::NO_STATE)
+	state(SamusState::no_state)
 {
 
 }

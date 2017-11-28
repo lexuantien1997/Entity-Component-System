@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <SamusCharacter>
+		
+	<!-- Normal picture when start game -->
+	<Normal>
+		<Normal_01>184 36 202 70</Normal_01>	
+	</Normal>
+	
+	
+	<!-- Running RIGHT and NO shooting -->
+	<RunNormal>
+		<RunNormal_01>224 36 241 69</RunNormal_01>
+		<RunNormal_02>283 36 302 70</RunNormal_02>
+		<RunNormal_03>322 36 344 70</RunNormal_03>		
+	</RunNormal>
+
+	
+	<!-- Running RIGHT and shooting RIGHT-->	
+	<RunShooting>
+		<RunShooting_01>202 76 223 110</RunShooting_01>
+		<RunShooting_02>242 76 264 109</RunShooting_02>
+		<RunShooting_03>281 76 305 109</RunShooting_03>
+		<RunShooting_04>319 76 346 109</RunShooting_04>		
+	</RunShooting>
+	
+	
+	<!-- Running RIGHT and shooting UP -->	
+	<RunShootingUp>
+		<RunShootingUp_01>205 113 221 153</RunShootingUp_01>
+		<RunShootingUp_02>246 113 260 153</RunShootingUp_02>
+		<RunShootingUp_03>283 113 302 153</RunShootingUp_03>
+		<RunShootingUp_04>322 113 343 103</RunShootingUp_04>		
+	</RunShootingUp>
+			
+	<!-- Jumping looked at RIGHT and  NO shooting -->	
+	<JumpNormal>
+		<JumpNormal_01>363 39 383 66</JumpNormal_01>
+	</JumpNormal>
+	
+	
+	<!-- Jumping looked at RIGHT and  shooting RIGHT-->
+	<JumpShooting>
+		<JumpShooting_01>360 79 385 106</JumpShooting_01>	
+	</JumpShooting>
+	
+	
+	<!-- Jumping looked at RIGHT and  shooting UP-->
+	<JumpShootingUp>
+		<JumpShootingUp_01>363 116 383 150</JumpShootingUp_01>	
+	</JumpShootingUp>
+	
+	
+	<!-- Rolling RIGHT -->
+	<Rolling>
+		<Rolling_01>201 165 215 180</Rolling_01>
+		<Rolling_02>231 165 245 180</Rolling_02>		
+	</Rolling>	
+	
+	<!-- Jumping and turning RIGHT-->
+	<Turning>
+		<Turning_01>332 164 353 181</Turning_01>
+		<Turning_02>365 160 381 185</Turning_02>		
+	</Turning> 
+  
+  </SamusCharacter>

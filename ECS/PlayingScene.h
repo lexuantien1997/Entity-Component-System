@@ -7,6 +7,7 @@
 #include "InputSystem.h"
 #include "InputManager.h"
 #include "MovementSystem.h"
+#include "AnimationSystem.h"
 
 class PlayingScene:public Scene
 {
@@ -14,6 +15,7 @@ private:
 	RenderingSystem renderSystem;
 	InputSystem inputSystem;
 	MovementSystem movementSystem;
+	AnimationSystem animationSystem;
 public:
 	PlayingScene();
 	~PlayingScene();
@@ -25,10 +27,6 @@ public:
 	void render() ;
 
 	void release(){ }
-
-	void onkeyUp(int key);
-
-	void onkeyDown(int key);
 };
 
 

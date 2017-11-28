@@ -11,11 +11,6 @@ class PlayerControllable:public Component
 	
 public:
 
-	int velocity = 100;
-	
-	int gravity = -500;
-
-
 	SamusState state;
 
 	struct KeyDirections

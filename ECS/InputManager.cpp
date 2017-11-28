@@ -43,33 +43,14 @@ void InputManager::update(HWND hWnd)
 	// Transfering current state into previous state
 	std::copy(currentKeyStates, currentKeyStates + 256, previousKeyStates);
 
-	// ========== current state ============
-
-	int keyCode = 0;
-	int keyState = 0;
-
 	// Collect all key states first
 	keyboard->GetDeviceState(sizeof(currentKeyStates), currentKeyStates);
 
 	if (isKeyDown(DIK_ESCAPE,KeyState::current))
 		PostMessage(hWnd, WM_QUIT, 0, 0);
 
-	DWORD dwElements = KEYBOARD_BUFFER_SIZE; // KEYBOARD_BUFFER_SIZE;
+	DWORD dwElements = KEYBOARD_BUFFER_SIZE; 
 	HRESULT hr = keyboard->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), keyEvents, &dwElements, 0);
-
-	// Scan through all data, check if the key is pressed or released
-	// ======================= Bỏ cái này đi ========================
-	for (DWORD i = 0; i < dwElements; i++)
-	{
-		keyCode = keyEvents[i].dwOfs;
-		keyState = keyEvents[i].dwData;
-
-		if ((keyState & 0x80) > 0) // press
-			onKeyUp(keyCode); 
-		else // not press
-			onKeyDown(keyCode); 
-	}
-	// ==============================================================
 }
 
 void InputManager::release()

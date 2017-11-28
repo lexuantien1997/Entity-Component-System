@@ -2,6 +2,12 @@
 #include "Sprite.h"
 
 
+
+map<string, vector<EntityInfo>> SpriteManager::getentityResource(WorldID Id)
+{
+	return entityResource[Id];
+}
+
 LPD3DXSPRITE SpriteManager::getSpriteHandler()
 {
 	return spriteHandler;
@@ -100,6 +106,48 @@ void SpriteManager::draw(Sprite *ss, Transform* t,bool isCenterSprite,bool flipX
 	spriteHandler->SetTransform(&oldMatrix);
 
 	end(); // finish
+}
+
+void SpriteManager::loadResource(string imageSource,WorldID Id)
+{
+	file<> xmlFile(imageSource.c_str());
+	xml_document<> doc;
+
+	doc.parse<0>(xmlFile.data());
+	
+	xml_node<> *node=doc.first_node()->first_node();
+
+	while (node != NULL)
+	{
+		string name = node->first_attribute("name")->value();		
+
+		xml_node<> *child = node->first_node();
+
+		while (child != NULL)
+		{
+			EntityInfo info;
+
+			info.width = stof(child->first_attribute("w")->value());
+			info.height = stof(child->first_attribute("h")->value());
+
+			info.rect.left = stof(child->first_attribute("x")->value());
+			info.rect.top= stof(child->first_attribute("y")->value());
+			info.rect.right = info.width + info.rect.left;
+			info.rect.bottom = info.height + info.rect.top;
+
+			entityResource[Id][name].push_back(info);
+
+			child = child->next_sibling();
+		}
+
+		node = node->next_sibling();
+
+	}
+}
+
+vector<EntityInfo> SpriteManager::getEntityInfo(WorldID Id, string state)
+{
+	return entityResource[Id][state];
 }
 
 void SpriteManager::begin()

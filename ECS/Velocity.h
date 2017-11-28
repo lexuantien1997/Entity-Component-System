@@ -17,6 +17,12 @@ private:
 
 	Vector2f vPlus;
 public:
+	int speed = 500;
+
+	int height = 900;
+
+	float maxJump;
+
 
 	// ============ get - set velocity ==================
 	void setVelocity(Vector2f &v,VelocityType t);
